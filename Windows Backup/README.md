@@ -11,3 +11,13 @@
   
   The Script read the Zabbix Hotname from the Zabbix Agent Conf.
   You can define with $hostname self a Hostname
+  
+# EXAMPLE
+  c:\zabbix\bin\win64>powershell.exe c:\zabbix\scripts\backup01.ps1| c:\zabbix\bin\win64\zabbix_sender.exe -c c:\zabbix\conf\zabbix_agentd.conf -i - 
+  
+  This send the output with zabbix_sender to the Zabbix  Server / Proxy
+  
+  debug:
+  c:\zabbix\bin\win64>powershell.exe c:\zabbix\scripts\backup01.ps1
+  
+  started only the Script and wirte the output to the console
