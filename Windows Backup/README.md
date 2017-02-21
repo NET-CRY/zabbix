@@ -4,7 +4,7 @@
 	It is then compared to how old the Job.
 	The variable "$expired" is used to determine how old the backup may be.
   
-	Returned values are returned:
+	Returned values:
 		wb.errorcode 0 ok
 		wb.errorcode backup found, but error
 		wb.errorcode backup found, no errors, but too old
