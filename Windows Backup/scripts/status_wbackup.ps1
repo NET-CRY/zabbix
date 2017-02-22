@@ -9,8 +9,8 @@
 	The variable "$expired" is used to determine how old the backup may be.
 	Returned values are returned:
 		wb.errorcode 0 ok
-		wb.errorcode backup found, but error
-		wb.errorcode backup found, no errors, but too old
+		wb.errorcode 1 backup found, but error
+		wb.errorcode 2 backup found, no errors, but too old
   
   The Script read the Zabbix Hotname from the Zabbix Agent Conf.
   You can define with $hostname self a Hostname
