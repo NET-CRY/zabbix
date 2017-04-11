@@ -4,7 +4,7 @@
   
   barman list-server --minimal
   
-  	`post-back.3e discover.postgres.server { "data":[ { "{#POSTGRES.SERVER}":"post-01.3e" }, { "{#POSTGRES.SERVER}":"post-02.3e" },{ "{#POSTGRES.SERVER}":"post-03.3e" } ] }`
+  	post-back.3e discover.postgres.server { "data":[ { "{#POSTGRES.SERVER}":"post-01.3e" }, { "{#POSTGRES.SERVER}":"post-02.3e" },{ "{#POSTGRES.SERVER}":"post-03.3e" } ] }
   
   
   2. search the latest Backup for the postgres Server
@@ -25,7 +25,7 @@
 3.1 check the Status for the postgres Server
 
   
-	`post-back.3e check.['post-03.3e.PostgreSQL'] OK
+	post-back.3e check.['post-03.3e.PostgreSQL'] OK
 	post-back.3e check.['post-03.3e.PostgreSQL.streaming'] OK
 	post-back.3e check.['post-03.3e.archiver.errors'] OK
 	post-back.3e check.['post-03.3e.backup.maximum.age'] FAILED
@@ -41,7 +41,7 @@
 	post-back.3e check.['post-03.3e.receive-wal.running'] OK
 	post-back.3e check.['post-03.3e.replication.slot'] OK
 	post-back.3e check.['post-03.3e.retention.policy.settings'] OK
-	post-back.3e check.['post-03.3e.superuser'] OK`  
+	post-back.3e check.['post-03.3e.superuser'] OK
 
 # The output send with zabbix_sender to the zabbix Server
 
