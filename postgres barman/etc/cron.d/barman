@@ -1,0 +1,2 @@
+# m h  dom mon dow   user     command
+  */30 * * * * barman [ -x /var/lib/barman/script/check_barman.pl ] && /var/lib/barman/script/check_barman.pl|zabbix_sender -c /etc/zabbix/zabbix_agentd.conf -i -  2>&1 >/tmp/check_barman.txt
