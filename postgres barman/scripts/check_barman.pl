@@ -4,6 +4,7 @@ use Data::Dumper;
 use Config::Tiny;
 use Time::Local;
 use Getopt::Long;
+use Switch;
 
 my $first = 1;
 my $opt_debug;
@@ -52,9 +53,13 @@ foreach my $postgres_server(sort (keys %$hash_postgres_server)){
 		}
 
 		if(($backup_type eq "Base_backup") or ($backup_type eq "WAL")){
-			if($line =~ /Disk usage\s+:\s+([\d+|.]*)\s+/){
+			if($line =~ /Disk usage\s+:\s+([\d+|.]*)\s+(\w+)/){
+				my $unit = $2;
 				(my $key = $1) =~ s/\s+//g;
-				print "$zabbix_hostname Disk.$backup_type.usage.['$postgres_server\'] $key\n";
+				
+				my $number = _convert_unit('unit' => $unit,'number' => $key);
+			
+				print "$zabbix_hostname Disk.$backup_type.usage.['$postgres_server\'] $number\n";
 			}
 			if(($backup_type eq "Base_backup") ){
 				if($line =~ /Begin time\s+:\s+(....)-(..)-(..)\s+(..):(..):(..)/){
@@ -125,5 +130,20 @@ foreach my $ITEM_KEY(sort (keys %$hash_data)){
 	my $value = $hash_data -> {"$ITEM_KEY"}-> {"value"};
 
 	print "$zabbix_hostname check.\[\'$ITEM_KEY\'\] $value\n";
+}
+
+sub _convert_unit{
+	my %arg = @_;
+	my $unit = $arg{'unit'};
+	my $number = $arg{'number'};
+	if(($unit) and ($number)){
+		switch($unit) {
+			case "KiB" { $number = $number * 1024 }
+			case "MiB" { $number = $number * 1024 * 1024 }
+			case "GiB" { $number = $number * 1024 * 1024 * 1024}
+			case "TiB" { $number = $number * 1024 * 1024 * 1024 * 1024}
+		}
+	}
+	return $number;
 }
 #print Dumper($hash_data);
